@@ -1,0 +1,54 @@
+# simple_pioneer.world - basic world file example using pretty models
+# Authors: Richard Vaughan
+# $Id$
+
+include "pioneer.inc"
+include "map.inc"
+include "sick.inc"
+include "walle.inc"
+
+paused 1
+
+# configure the GUI window
+window
+(
+  size [ 800 600 ] # in pixels
+  scale 100   # pixels per meter
+  center [ -1.883  -4.246 ]
+  rotate [ 67.500  -32.500 ]
+  			
+  show_data 1              # 1=on 0=off
+)
+
+# load an environment bitmap
+floorplan
+( 
+  name "cave"
+  size [25.000 25.000 1.200]
+  pose [0.000 0.000 0.000 0.000]
+  bitmap "bitmaps/office.png"
+)
+
+fancypioneer2dx
+(		  
+  # can refer to the robot by this name
+  name "r0"
+  pose [ -1.728 -4.262 0.000 -151.707 ] 
+
+  # pioneer2dx's sonars	will be ranger:0 and the laser will be ranger:1
+  fancysicklaser( pose [ 0.000 0.000 0.000 0.000 ] ) 
+ 
+  # demonstrate a plugin controller, implemented in examples/ctrl/wander.cc
+  ctrl "wander"
+
+  # report error-free position in world coordinates
+  localization "gps"
+  localization_origin [ 0 0 0 0 ]
+)
+
+
+walle
+(
+  name "walle"
+  pose [ -10.756 10.489 0.000 -146.104 ]
+)

@@ -1,0 +1,23 @@
+<launch>
+
+  <node name="control_traj_planner_node" 
+        pkg="control_traj_planner" 
+        type="planner" 
+        args="$(find control_traj_planner)/map/office.png" 
+        output="screen">
+    <param name="wall_distance" type="double" value="0.2" />
+  </node>
+
+  <node name="stage_ros" 
+        pkg="stage_ros" 
+        type="stageros" 
+        args="-d $(find control_traj_planner)/stage/pioneer_office.world" 
+  /> 
+
+  <node name="tf"
+        pkg="tf"
+        type="static_transform_publisher"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 map robot_0/odom 100"
+  />
+
+</launch>

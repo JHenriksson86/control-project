@@ -1,0 +1,19 @@
+<launch>
+
+  <node 
+    name="control_path_planner_node" 
+    pkg="control_path_planner" 
+    type="planner" 
+    args="$(find control_path_planner)/map/office.png" 
+    output="screen">
+    <param name="wall_distance" type="double" value="0.4"/>
+  </node>
+
+  <node 
+    name="stage_ros" 
+    pkg="stage_ros" 
+    type="stageros" 
+    args="-d $(find control_path_planner)/stage/pioneer_office.world" 
+  /> 
+
+</launch>
